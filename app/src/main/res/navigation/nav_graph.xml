@@ -18,5 +18,27 @@
         android:id="@+id/dashboardFragment"
         android:name="cl.rayout.desafiobci.dashboard.view.DashboardFragment"
         android:label="dashboard_fragment"
-        tools:layout="@layout/dashboard_fragment" />
+        tools:layout="@layout/dashboard_fragment">
+        <action
+            android:id="@+id/action_dashboardFragment_to_pokemonDetailsFragment"
+            app:destination="@id/pokemonDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemonDetailsFragment"
+        android:name="cl.rayout.desafiobci.pokemondetails.view.PokemonDetailsFragment"
+        android:label="pokemon_details_fragment"
+        tools:layout="@layout/pokemon_details_fragment">
+        <argument
+            android:name="pokeName"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="pokeId"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="pokeUrl"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>

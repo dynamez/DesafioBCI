@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import cl.rayout.desafiobci.R
 import cl.rayout.desafiobci.common.recyclerview.AdapterClick
 import cl.rayout.desafiobci.common.recyclerview.AdapterListener
+import cl.rayout.desafiobci.common.utils.StringUtils
 import cl.rayout.desafiobci.dashboard.model.DashboardPokemonModel
 import cl.rayout.desafiobci.dashboard.recyclerview.PokemonAdapter
 import cl.rayout.desafiobci.dashboard.viewmodel.DashboardViewModel
@@ -30,17 +32,29 @@ class DashboardFragment : Fragment(), AdapterListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecycler()
-        viewModel.getAllPokemon()
+        setupObservables()
+    }
+
+    private fun setupObservables() {
         viewModel.resultLiveData.observe(viewLifecycleOwner, Observer { pokemonResponse ->
             listAdapter.setupFilter(pokemonResponse?.results?.map {
-                DashboardPokemonModel("asd", it.name, it.url)
+                DashboardPokemonModel(StringUtils.getPokemonIdfromURL(it.url), it.name, it.url)
             })
         })
     }
 
     override fun listen(click: AdapterClick?, itemView: View?) {
         when (click) {
-            is DashboardPokemonModel -> Timber.d("${click.name} Clicked")
+            is DashboardPokemonModel -> {
+                Timber.d("${click.name} Clicked")
+                val actions =
+                    DashboardFragmentDirections.actionDashboardFragmentToPokemonDetailsFragment(
+                        pokeName = click.name,
+                        pokeId = click.id,
+                        pokeUrl = click.url
+                    )
+                findNavController().navigate(actions)
+            }
         }
     }
 

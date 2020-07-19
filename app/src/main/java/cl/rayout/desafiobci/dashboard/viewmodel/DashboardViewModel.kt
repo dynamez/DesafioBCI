@@ -10,8 +10,11 @@ import kotlinx.coroutines.launch
 class DashboardViewModel(val dashBoardRepository: DashBoardRepository) : BaseViewModel() {
     val resultLiveData: MutableLiveData<AllPokemonResponse?> = MutableLiveData()
 
+    init {
+        getAllPokemon()
+    }
 
-    fun getAllPokemon() {
+    private fun getAllPokemon() {
         viewModelScope.launch {
             resultLiveData.postValue(dashBoardRepository.getAllPokemons())
         }

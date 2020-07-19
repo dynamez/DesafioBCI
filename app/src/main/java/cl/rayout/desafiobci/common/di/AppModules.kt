@@ -6,6 +6,8 @@ import cl.rayout.desafiobci.common.network.LiveNetworkMonitor
 import cl.rayout.desafiobci.dashboard.network.PokemonApiFactory
 import cl.rayout.desafiobci.dashboard.repository.DashBoardRepository
 import cl.rayout.desafiobci.dashboard.viewmodel.DashboardViewModel
+import cl.rayout.desafiobci.pokemondetails.repository.PokemonDetailRepository
+import cl.rayout.desafiobci.pokemondetails.viewmodel.PokemonDetailsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -16,10 +18,11 @@ val myModules = module {
     */
     //DI for viewmodels
     viewModel { DashboardViewModel(get()) }
-//    viewModel { AddCounterViewModel(get()) }
+    viewModel { PokemonDetailsViewModel(get()) }
     //Single DI for repositories
     //each repository that depends on network implementation receives and instance of an api connection
     single { DashBoardRepository(PokemonApiFactory.pokemonApi) }
+    single { PokemonDetailRepository(PokemonApiFactory.pokemonApi) }
 
 //    Room database DI and test modules
 
