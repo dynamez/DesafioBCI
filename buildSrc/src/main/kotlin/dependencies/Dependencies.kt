@@ -49,4 +49,5 @@ object Dependencies {
         "org.jetbrains.kotlin:kotlin-reflect:${BuildDependenciesVersions.KOTLIN}"
     const val COIL = "io.coil-kt:coil:${BuildDependenciesVersions.COIL}"
     const val LOTTIE = "com.airbnb.android:lottie:${BuildDependenciesVersions.LOTTIE}"
+    const val PAGING = "androidx.paging:paging-runtime-ktx:${BuildDependenciesVersions.PAGING}"
 }

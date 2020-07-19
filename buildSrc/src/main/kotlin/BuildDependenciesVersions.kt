@@ -21,6 +21,7 @@ object BuildDependenciesVersions {
     const val OKHTTP = "4.7.1"
     const val COIL = "0.11.0"
     const val LOTTIE = "3.4.1"
+    const val PAGING = "2.1.2"
 
     // Tests
     const val TEST = "1.2.0"

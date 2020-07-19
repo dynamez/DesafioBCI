@@ -24,7 +24,7 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         GlobalScope.launch {
-            delay(2000).run {
+            delay(3000).run {
                 findNavController().navigate(R.id.action_splashFragment_to_dashboardFragment)
             }
         }
