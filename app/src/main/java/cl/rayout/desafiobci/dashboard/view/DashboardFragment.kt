@@ -42,7 +42,6 @@ class DashboardFragment : Fragment(), AdapterListener {
         when (click) {
             is DashboardPokemonModel -> Timber.d("${click.name} Clicked")
         }
-
     }
 
     //Recycler setup and listeners

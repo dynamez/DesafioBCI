@@ -1,5 +1,7 @@
 package cl.rayout.desafiobci.common.di
 
+import androidx.room.Room
+import cl.rayout.desafiobci.common.database.TestDatabase
 import cl.rayout.desafiobci.common.network.LiveNetworkMonitor
 import cl.rayout.desafiobci.dashboard.network.PokemonApiFactory
 import cl.rayout.desafiobci.dashboard.repository.DashBoardRepository
@@ -24,14 +26,14 @@ val myModules = module {
 //Live NetworkMonitor
     single { LiveNetworkMonitor(androidContext()) }
 
-//    single {
-//        Room.databaseBuilder(
-//            androidContext(),
-//            TestDatabase::class.java, "test.db"
-//        )
-//            .fallbackToDestructiveMigration()
-//            .build()
-//    }
-//    single { get<TestDatabase>().counterDao() }
+    single {
+        Room.databaseBuilder(
+            androidContext(),
+            TestDatabase::class.java, "test.db"
+        )
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+    single { get<TestDatabase>().dashboardPokemonDao() }
 }
 
