@@ -1,6 +1,7 @@
 package cl.rayout.desafiobci.dashboard.network
 
 import cl.rayout.desafiobci.BuildConfig
+import cl.rayout.desafiobci.pokemondetails.model.LocationDetails
 import cl.rayout.desafiobci.pokemondetails.model.PokemonDetailsNetworkResponse
 import cl.rayout.desafiobci.pokemondetails.model.PokemonEvolutionChain
 import cl.rayout.desafiobci.pokemondetails.model.PokemonSpecies
@@ -21,4 +22,7 @@ interface PokemonNetworkInterface {
 
     @GET("${BuildConfig.ENDPOINT_VERSION}evolution-chain/{pokeId}/")
     suspend fun getPokemonEvolutionChain(@Path("pokeId") pokeId: String?): Response<PokemonEvolutionChain>
+
+    @GET("${BuildConfig.ENDPOINT_VERSION}{path}")
+    suspend fun getPokemonLocation(@Path("path") path: String?): Response<List<LocationDetails>>
 }

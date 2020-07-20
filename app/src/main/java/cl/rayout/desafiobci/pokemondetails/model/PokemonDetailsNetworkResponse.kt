@@ -65,3 +65,10 @@ data class PokeEvolvesTo(
     @field:Json(name = "species") val pokeSpecies: PokeSpecies,
     @field:Json(name = "evolves_to") val pokeEvolvesTo: List<PokeEvolvesTo>?
 )
+
+data class PokeLocationList(val locationDetails: List<LocationDetails>)
+data class LocationDetails(@field:Json(name = "location_area") val location: Location)
+data class Location(
+    val name: String?,
+    val url: String?
+)

@@ -5,4 +5,11 @@
 
     <!--    Splash-->
     <string name="main_title">DESAFÍO BCI</string>
+
+    <!--    Pokemon details-->
+    <string name="type">Tipo</string>
+    <string name="places_to_find">Donde encontrarlo</string>
+    <string name="moves">Ataques</string>
+    <string name="abilities">Habilidades</string>
+    <string name="evolutions">Evoluciones</string>
 </resources>
