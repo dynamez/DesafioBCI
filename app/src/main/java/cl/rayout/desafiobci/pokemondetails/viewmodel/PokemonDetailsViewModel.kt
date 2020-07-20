@@ -17,6 +17,7 @@ class PokemonDetailsViewModel(private val pokemonDetailRepository: PokemonDetail
     val pokemonSpeciesResponse: MutableLiveData<PokemonSpecies?> = MutableLiveData()
     val pokemonEvolutionResponse: MutableLiveData<PokemonEvolutionChain?> = MutableLiveData()
     val pokeLocationResponse: MutableLiveData<List<LocationDetails>?> = MutableLiveData()
+    val pokeEvolutionResponse: MutableLiveData<PokemonEvolutionChain> = MutableLiveData()
     val pokemonAbilities = pokemonResponse.map {
         it?.pokemonAbilities
     }
@@ -53,11 +54,6 @@ class PokemonDetailsViewModel(private val pokemonDetailRepository: PokemonDetail
             withContext(Dispatchers.IO) {
                 pokemonResponse.postValue(pokemonDetailRepository.getPokemonDetail(pokeId))
                 pokemonSpeciesResponse.postValue(pokemonDetailRepository.getPokemonSpecies(pokeId))
-                pokemonEvolutionResponse.postValue(
-                    pokemonDetailRepository.getPokemonEvolutionChain(
-                        "2"
-                    )
-                )
             }
         }
     }
@@ -70,13 +66,18 @@ class PokemonDetailsViewModel(private val pokemonDetailRepository: PokemonDetail
         }
     }
 
-    //    fun getPokemonSpecies(){
-//        viewModelScope.launch(coroutineExceptionHandler) {
-//            withContext(Dispatchers.IO) {
-//                pokemonSpeciesResponse.postValue(pokemonDetailRepository.getPokemonSpecies(pokeId))
-//            }
-//        }
-//    }
+    fun getPokemonEvolutions(pokeId: String?) {
+        viewModelScope.launch(coroutineExceptionHandler) {
+            withContext(Dispatchers.IO) {
+                pokemonEvolutionResponse.postValue(
+                    pokemonDetailRepository.getPokemonEvolutionChain(
+                        pokeId
+                    )
+                )
+            }
+        }
+    }
+
     private fun recursiveEvolutionSearcher(
         backupList: MutableList<String>,
         searchedList: List<PokeEvolvesTo>?

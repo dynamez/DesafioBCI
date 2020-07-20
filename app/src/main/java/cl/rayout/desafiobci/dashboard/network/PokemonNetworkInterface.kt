@@ -5,6 +5,7 @@ import cl.rayout.desafiobci.pokemondetails.model.LocationDetails
 import cl.rayout.desafiobci.pokemondetails.model.PokemonDetailsNetworkResponse
 import cl.rayout.desafiobci.pokemondetails.model.PokemonEvolutionChain
 import cl.rayout.desafiobci.pokemondetails.model.PokemonSpecies
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -13,6 +14,9 @@ interface PokemonNetworkInterface {
 
     @GET("${BuildConfig.ENDPOINT_VERSION}pokemon?limit=151&offset=0")
     suspend fun getAllPokemons(): Response<AllPokemonResponse>
+
+    @GET("${BuildConfig.ENDPOINT_VERSION}pokemon?limit=151&offset=0")
+    fun getAllPokemonsWithPaging(): Call<AllPokemonResponse>
 
     @GET("${BuildConfig.ENDPOINT_VERSION}pokemon/{pokeId}/")
     suspend fun getPokemonData(@Path("pokeId") pokeId: String?): Response<PokemonDetailsNetworkResponse>

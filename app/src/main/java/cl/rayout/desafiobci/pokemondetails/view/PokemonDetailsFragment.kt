@@ -90,10 +90,14 @@ class PokemonDetailsFragment : Fragment(), AdapterListener {
                 AbilitiesModel(id = it.ability.name, name = it.ability.name)
             })
         })
+        viewModel.pokemonSpeciesResponse.observe(viewLifecycleOwner, Observer {
+            viewModel.getPokemonEvolutions(StringUtils.getPokeIdFromEvolutionChainURL(it?.evolutionChain?.url))
+        })
         viewModel.pokemonResponse.observe(viewLifecycleOwner, Observer {
             val url = StringUtils.getPokeLocationFromUrl(it?.locationAreaEncounters)
             Timber.d("Locations url  $url")
             viewModel.getPokemonLocations(StringUtils.getPokeLocationFromUrl(it?.locationAreaEncounters))
+
         })
 
         viewModel.pokeLocationResponse.observe(viewLifecycleOwner, Observer { pokeLocationList ->

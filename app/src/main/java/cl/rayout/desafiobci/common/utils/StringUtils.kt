@@ -6,9 +6,9 @@ object StringUtils {
         33
     )?.dropLast(1) ?: ""
 
-    fun getPokeIdFromEvolutionChainURL(url: String): String = url.substring(
+    fun getPokeIdFromEvolutionChainURL(url: String?): String = url?.substring(
         41
-    ).dropLast(1)
+    )?.dropLast(1) ?: ""
 
     fun getPokeLocationFromUrl(url: String?): String = url?.substring(
         25

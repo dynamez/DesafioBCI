@@ -8,7 +8,8 @@ data class PokemonDetailsNetworkResponse(
     @field:Json(name = "types") val pokemonTypes: List<PokemonTypes>?,
     @field:Json(name = "location_area_encounters") val locationAreaEncounters: String?,
     @field:Json(name = "moves") val pokemonMoves: List<PokemonMoves>?,
-    @field:Json(name = "species") val pokeSpecies: PokeSpecies
+    @field:Json(name = "species") val pokeSpecies: PokeSpecies,
+    val id: String
 )
 
 data class PokemonAbilities(

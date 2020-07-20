@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -33,13 +34,29 @@ class DashboardFragment : Fragment(), AdapterListener {
         super.onViewCreated(view, savedInstanceState)
         setupRecycler()
         setupObservables()
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                listAdapter.filter(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val list = listAdapter.filter(newText)
+
+                return true
+            }
+
+        })
     }
 
     private fun setupObservables() {
         viewModel.resultLiveData.observe(viewLifecycleOwner, Observer { pokemonResponse ->
-            listAdapter.setupFilter(pokemonResponse?.results?.map {
-                DashboardPokemonModel(StringUtils.getPokemonIdfromURL(it.url), it.name, it.url)
-            })
+            pokemonResponse?.let {
+                listAdapter.setupFilter(pokemonResponse.results.map {
+                    DashboardPokemonModel(StringUtils.getPokemonIdfromURL(it.url), it.name, it.url)
+                })
+            }
+
         })
     }
 
