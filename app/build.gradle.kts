@@ -82,6 +82,8 @@ dependencies {
     implementation(Dependencies.RECYCLE_VIEW)
     implementation(Dependencies.SWIPE_REFRESH_LAYOUT)
     implementation(Dependencies.COIL)
+    implementation(Dependencies.LOTTIE)
+    implementation(Dependencies.PAGING)
 
     //DI
     implementation(Dependencies.KOINCORE)
